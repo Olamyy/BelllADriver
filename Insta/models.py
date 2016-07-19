@@ -2,8 +2,7 @@ from django.db import models
 
 
 class Contact(models.Model):
-    first_name = models.CharField(max_length= 50)
-    last_name = models.CharField(max_length= 50)
+    name = models.CharField(max_length=100, default='')
     number = models.CharField(max_length= 50)
     email = models.CharField(max_length= 50)
     pickup_address = models.CharField(max_length=100, default='')
@@ -14,7 +13,7 @@ class Contact(models.Model):
 
 class Plan(models.Model):
     plan_options = (('HR', 'Hourly'),('DY', 'Daily'),('MN', 'Monthly'),('EV', 'Event Plan'))
-    plan = models.CharField(max_length= 1, choices=plan_options)
+    plan = models.CharField(max_length= 1, choices=plan_options, default="Event Plan")
     driver_sex_option = (('MA', 'Male'), ('FE', 'Female'))
     driver_sex = models.CharField(max_length= 1, choices=driver_sex_option, default="Male")
     payment_options = (('CS', 'Cash'), ('CC', 'Credit Card'))
@@ -25,8 +24,6 @@ class Plan(models.Model):
 
 
 class Driver(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
     number = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     home_address = models.CharField(max_length= 50)

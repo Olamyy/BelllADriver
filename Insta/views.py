@@ -1,5 +1,6 @@
 import json
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 from .forms import ContactForm, DriverForm, PlanForm
 from django.http import HttpResponse
 
@@ -14,46 +15,23 @@ def faq(request):
 
 def drivers(request):
     if request.method == "POST":
-        print "Am in driver form"
-        driverform = DriverForm(request.POST)
-        if driverform.is_valid():
             return HttpResponse("Got all i need")
-        elif driverform.errors:
-            print "Driver Form is not valid"
-            return render(request, 'Insta/driver.html',
-                          {'contact': driverform})
-    else:
-        print "First view"
-        driverform = DriverForm()
-        return render(request, 'Insta/driver.html',
-                      {'driverform': driverform})
+
+    return render(request, 'Insta/driver.html')
 
 
 def contact(request):
     if request.method == "POST":
-        print  "Am in contact form"
-        contactform = ContactForm(request.POST)
-        if contactform.is_valid():
-            print "Contact Form is valid"
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
-            number = request.POST.get('number')
+            author = request.POST.get('author')
             email = request.POST.get('email')
-            pickup = request.POST.get('pickup_address')
+            number = request.POST.get('number')
+            address = request.POST.get('address')
+            sex = request.POST.get('sex')
+            payment = request.POST.get('payment')
             plan = request.POST.get('plan')
-            sex = request.POST.get('driver_sex')
-            pay = request.POST.get('payment')
-            return HttpResponse(json.dumps({'message': (first_name, last_name, number, email, pickup, plan, sex, pay)}))
-        elif contactform.errors:
-            print "Contact Form is not valid"
-            return render(request, 'Insta/index.html',
-                          {'contact': contactform})
-    else:
-        print "First view"
-        contactform = ContactForm()
-        plan = PlanForm()
-        return render(request, 'Insta/book.html',
-                  {'contact': contactform,'plan': plan})
+            return HttpResponse(json.dumps({'message': (author, email, number, address, plan, payment)}))
+
+    return render(request, 'Insta/book.html')
 
 
 def contact_success(request):
