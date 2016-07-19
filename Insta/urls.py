@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^about/faq/$', views.faq, name="faq"),
     url(r'^drivers/become/$', views.drivers, name="faq"),
     url(r'^drivers/book/', views.contact, name='contact'),
+    url(r'^user/', views.aro, name='user_manage')
 
 
 ]

@@ -18,6 +18,10 @@ def drivers(request):
     return render(request, 'Insta/driver.html')
 
 
+def aro(request):
+    return render(request, 'Insta/UserManage.wsdl')
+
+
 def contact(request):
     if request.method == "POST":
             author = request.POST.get('author')
