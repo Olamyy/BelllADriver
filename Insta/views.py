@@ -1,7 +1,5 @@
 import json
-from django.shortcuts import render, render_to_response
-from django.template import RequestContext
-from .forms import ContactForm, DriverForm, PlanForm
+from django.shortcuts import render
 from django.http import HttpResponse
 
 
